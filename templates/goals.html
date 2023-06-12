@@ -1,0 +1,39 @@
+{% extends 'master.html' %}
+
+{% block title %}{{ Goals }}{% endblock %}
+
+{% block content %}
+    {% for goal in goals %}
+        {% if user.calories_burned > goal.goal_calories and date.date <= goal.goal_date.date %}
+            <h1>Congratulations! You have reached your goal!</h1>
+        {% endif %}
+        {% if user.calories_burned < goal.goal_calories and date.date > goal.goal_date.date %}
+            <h1>Sorry! You have not reached your goal! :(</h1>
+        {% endif %}
+    {% endfor %}
+    <h1>Goal</h1>
+    <p>Here is your goal:</p>
+    <ul>
+        {% for goal in goals %}
+            <li>kilocalories to burn: {{ calories_to_burn }}</li>
+            <li>deadline: {{ goal.goal_date }}</li>
+        {% endfor %}
+    </ul>
+    <div>
+        <h2>Here is your progress:</h2>
+        <span>kilocalories burned: {{ user.calories_burned }} </span>
+        <form method="POST" action="{% url 'goals' %}">
+            {% csrf_token %}
+            {{ reset_form.as_p }}
+            <button  style="margin-top: 2%" type="submit" class="btn btn-primary" value="reset">reset</button>
+        </form>
+    </div>
+    <h2 style="margin-top: 3%">Update your goal:</h2>
+    <form method="POST" action="{% url 'goals' %}">
+        {% csrf_token %}
+        <p>{{ form.as_p }}</p>
+        <p><input type="submit" class="btn btn-primary" value="Add Goal"></p>
+    </form>
+    {% block a %}
+    {% endblock %}
+{% endblock %}

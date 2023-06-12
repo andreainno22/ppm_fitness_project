@@ -1,0 +1,22 @@
+{% extends "master.html" %}
+
+{% block title %} Workouts {% endblock title %}
+{% block content %}
+    <h1>{{ workout }}</h1>
+        {% for exercise in exercises %}
+            <div>
+                <p style="color: blue"> {{ exercise.exercise }} </p>
+                <p> reps: {{ exercise.reps }}, sets: {{ exercise.sets }},
+                    rest time: {{ exercise.rest_time }} min,
+                    training weight: {{ exercise.user_exercise.training_weight }} kg
+                <a style="text-decoration: none;" href="change_training_weight/{{ exercise.exercise.id }}">change weight</a> </p>
+            </div>
+        {% endfor %}
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-primary">start!</button>
+    </form>
+
+
+
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends 'master.html' %}
+{% block content %}
+    <h1>REST!   <span id="timer"></span></h1>
+    <div>
+        <button style="margin-top: 2%" type="submit" class="btn btn-primary"><a
+                style="text-decoration: none; color: white;"
+                href="{% url 'workout_start' rest_time=rest_time %}">go!</a></button>
+    </div>
+
+
+    <div>
+        <button style="margin-top: 5%" type="submit" class="btn btn-primary"><a
+                style="text-decoration: none; color: white;"
+                href="{% url 'workouts_list' %}"> stop
+            workout</a></button>
+    </div>
+    <script>
+    function startTimer(duration, display) {
+        var timer = duration, minutes, seconds;
+        setInterval(function () {
+            minutes = parseInt(timer / 60, 10);
+            seconds = parseInt(timer % 60, 10);
+
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+
+            display.textContent = minutes + ":" + seconds;
+
+            if (timer <= 0) {
+        clearInterval(intervalId);
+      } else {
+        timer--;
+      }
+    }, 1000);
+  }
+
+    var timerDuration = {{rest_time}}*60;
+
+    window.onload = function () {
+        var display = document.getElementById("timer");
+        startTimer(timerDuration, display);
+    };
+</script>
+{% endblock %}
+
+

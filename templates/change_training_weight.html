@@ -1,0 +1,14 @@
+{% extends 'master.html' %}
+
+{% block title %}
+    Change weight
+{% endblock %}
+
+{% block content %}
+    <h2>Change weight</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Change</button>
+    </form>
+{% endblock %}

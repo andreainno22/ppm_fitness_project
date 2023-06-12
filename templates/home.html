@@ -1,0 +1,17 @@
+{% extends "master.html" %}
+
+{% block title %} Home
+{% endblock %}
+
+{% block content %}
+    <h1>Home</h1>
+    {% if user.is_authenticated %}
+    <h1>Hi {{ user.username }}!</h1>
+        <h2> <a style="text-decoration: none" href="{% url 'goals' %}"> See your goal!</a></h2>
+        <h2> <a style="text-decoration: none" href="{% url 'workouts_list' %}"> Workout</a></h2>
+        {% else %}
+        <h2>Hi there! <a href="{% url 'login' %}">Login</a> or <a href="{% url 'signUp' %}">Sign up</a> to start tracking your goals.</h2>
+    {% endif %}
+
+
+{% endblock %}

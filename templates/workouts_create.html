@@ -1,0 +1,14 @@
+{% extends 'master.html' %}
+
+{% block content %}
+<h2> Create your workout</h2>
+        <form method="post" action="{% url 'workouts_list' %}">
+            {% csrf_token %}
+                <div class="form-group">
+                        {{ form.as_p }}
+                </div>
+            {% block invalid_input%}
+            {% endblock %}
+            <button type="submit"> Add</button>
+        </form>
+{% endblock %}

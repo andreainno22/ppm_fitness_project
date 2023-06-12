@@ -1,0 +1,15 @@
+{% extends 'master.html' %}
+
+{% block title %}Start!{% endblock %}
+{% block content %}
+
+    <div><h1> WORK! </h1></div>
+    <div>
+        <button style="margin-top: 5%;" type="submit" class="btn btn-primary"><a style="text-decoration: none; color: white"
+                                                         href="{% url 'workout_start_rest' rest_time=rest_time %}">rest</a></button>
+    </div>
+    <div><button type="submit" class="btn btn-primary" name="exercise" value="0" style="margin-top: 5%"><a
+            style="text-decoration: none; color: white" href="{% url 'workouts_list' %}"> stop
+        workout</a></button>
+    </div>
+{% endblock %}

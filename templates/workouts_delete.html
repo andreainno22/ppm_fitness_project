@@ -1,0 +1,22 @@
+{% extends 'master.html' %}
+
+{% block title %} Delete workouts {% endblock %}
+
+{% block content %}
+    <h2>  Here you can delete some different workouts to your training plan!  </h2>
+    <p> You can delete:</p>
+    <form method="POST" action="{% url 'workouts_delete' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <button type="submit" class="btn btn-danger" style="margin-top: 2%" value="Delete"> Delete</button>
+    </form>
+
+    {% block content1 %}
+    {% endblock content1 %}
+    </p>
+
+
+{% endblock %}
+```
+

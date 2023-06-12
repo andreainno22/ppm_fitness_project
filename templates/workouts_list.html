@@ -1,0 +1,44 @@
+{% extends 'master.html' %}
+
+{% block title %} Workouts {% endblock %}
+
+{% block content %}
+    <h1>Workouts chosen for you!</h1>
+    <ul>
+        {% for workout in workouts %}
+            <li><span style="color: blue"> {{ workout.name }}</span>: {{ workout.description }},
+                duration: {{ workout.duration }} min,
+                kilocalories: {{ workout.calories }}</li>
+        {% endfor %}
+    </ul>
+
+    {% if user.is_authenticated %}
+        <button type="submit" class="btn btn-success"><a style="text-decoration: none; color: white" href="{% url 'workouts_add' %}">Add workouts</a><br></button>
+        <h1 style="margin-top: 5%">Your workouts</h1>
+        <ul>
+            {% for user_workout in user_workouts %}
+                <li><span style="color: blue"> {{ user_workout }}:</span><span> {{ user_workout.workout.description }},
+                duration: {{ user_workout.workout.duration }} min,
+                    kilocalories: {{ user_workout.workout.calories }}, workout done {{ user_workout.number_of_workouts_done }} times</span><a
+                        href="workouts_selection/{{ user_workout.workout.id }}"> see more </a></li>
+            {% endfor %}
+        </ul>
+        <button type="submit" class="btn btn-danger"> <a style="text-decoration: none; color: white" href="{% url 'workouts_delete' %}">Delete workouts</a></button>
+
+        <h2 style="margin-top: 5%"> Create your workout</h2>
+        <form method="post" action="{% url 'workouts_list' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                {{ form.as_p }}
+            </div>
+            {% block invalid_input %}
+            {% endblock %}
+            <button type="submit" class="btn btn-primary" style="color: white"> Create</button>
+        </form>
+    {% else %}
+        <h2>You are not logged in. To manage your workouts you must log in.</h2>
+        <a href="{% url 'login' %}">Login</a>
+        <a href="{% url 'signUp' %}">Sign up</a>
+
+    {% endif %}
+{% endblock %}

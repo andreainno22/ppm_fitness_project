@@ -1,0 +1,23 @@
+{% extends "master.html" %}
+
+{% block title %} Workouts {% endblock title %}
+{% block content %}
+    <h2> Here you can add some different workouts to your training plan! </h2>
+    You can add:
+    <form method="post">
+        {% csrf_token %}
+        {% for workouts in form.workouts %}
+            <div class="form-group">
+                 {{ workouts }}
+            </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-success" style="margin-top: 2%"> Add </button>
+    </form>
+    <p>
+    {% block content1%}
+      {% endblock content1 %}
+    </p>
+
+
+{% endblock %}
+```
