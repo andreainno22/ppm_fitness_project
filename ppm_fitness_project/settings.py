@@ -142,3 +142,5 @@ AUTH_USER_MODEL = "fitness_tracking_app.CustomUser"
 
 LOGIN_REDIRECT_URL = "home"
 LOGOUT_REDIRECT_URL = "home"
+
+LOGIN_URL = "login"
