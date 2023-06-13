@@ -5,7 +5,7 @@ from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('', views.home, name='home'),
-    path('fitness_tracking_app/', include("django.contrib.auth.urls")),
+    path('registration/', include("django.contrib.auth.urls")),
     path("signUp/", SignUpView.as_view(), name="signUp"),
     #path('login/', auth_views.LoginView.as_view(template_name="registration/login.html"), name='login'),
     #path('logout/', auth_views.LogoutView.as_view(next_page='home'), name='logout'),
